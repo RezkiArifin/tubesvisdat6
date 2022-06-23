@@ -22,7 +22,6 @@ from bokeh.application import Application
 
 # In[12]:
 
-<<<<<<< HEAD
 
 from bokeh.io import output_notebook, show
 
@@ -61,9 +60,6 @@ DataList = list(data.columns)
 
 
 def newData(dt, feature):
-=======
-def make_dataset(lokasi, feature, feature2):
->>>>>>> 5b20155a5ed8f07f28ce1ae1b4dfc494af96616d
 
     
     xs = []
@@ -71,12 +67,7 @@ def make_dataset(lokasi, feature, feature2):
     colors = []
     labels = []
 
-<<<<<<< HEAD
     for i, prov in enumerate(dt):
-=======
-
-    for i, lokasi in enumerate(lokasi):
->>>>>>> 5b20155a5ed8f07f28ce1ae1b4dfc494af96616d
 
         dat = data[data['Province'] == prov].reset_index(drop = True)
         
@@ -89,13 +80,10 @@ def make_dataset(lokasi, feature, feature2):
         colors.append(Category20_16[i])
         labels.append(prov)
 
-
-
     new_src = ColumnDataSource(data={'x': xs, 'y': ys, 'color': colors, 'label': labels})
 
     return new_src
 
-<<<<<<< HEAD
 
 # In[17]:
 
@@ -119,30 +107,6 @@ def provinceUpdate(prv, dtLama, dtBaru):
     
     plot = [chbx.labels[i] for i in chbx.active]   
     new_src = newData(plot, fitur.value)
-=======
-def make_plot(src, src2, feature):
-    p = figure(plot_width = 700, plot_height = 400, 
-            title = 'Covid19-Indonesia All Time Series',
-            x_axis_label = 'date', y_axis_label = 'Feature Selected')
-
-    p.multi_line('x', 'y', color = 'color', legend_field = 'label', line_width = 2, source = src)
-    p.multi_line('x', 'y', color = 'color', legend_field = 'label', line_width = 2, source = src2)
-    tooltips = [
-            ('Date','$x'),
-            ('Total', '$y'),
-           ]
-    
-    p.add_tools(HoverTool(tooltips=tooltips))
-
-    return p
-
-def update_country(attr, old, new):
-    lokasi_plot = [lokasi_selection.labels[i] for i in lokasi_selection.active]
-
-    
-    new_src = make_dataset(lokasi_plot, feature_select.value)
-
->>>>>>> 5b20155a5ed8f07f28ce1ae1b4dfc494af96616d
     src.data.update(new_src.data)
 
 
@@ -159,17 +123,8 @@ def fiturUpdate(ftr, dtLama, dtBaru):
 
 # In[20]:
 
-<<<<<<< HEAD
-=======
-feature_select2 = Select(options = col_list[2:], value = 'Total Deaths', title = 'Feature Select 2')
-feature_select2.on_change('value', update_feature)
 
 
-initial_country = [lokasi_selection.labels[i] for i in lokasi_selection.active]
->>>>>>> 5b20155a5ed8f07f28ce1ae1b4dfc494af96616d
-
-
-<<<<<<< HEAD
 chbx = CheckboxGroup(labels=prov, active = [0])
 chbx.on_change('active', provinceUpdate)
 
@@ -189,14 +144,6 @@ p = plotGraf(src, fitur.value)
 
 # Put controls in a single element
 controls = WidgetBox(fitur, chbx)
-=======
-
-p = make_plot(src, feature_select.value)
-#edit
-
-
-controls = WidgetBox(feature_select,feature_select2, lokasi_selection)
->>>>>>> 5b20155a5ed8f07f28ce1ae1b4dfc494af96616d
 
 # Create a row layout
 layout = row(controls, p)
